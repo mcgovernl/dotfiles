@@ -1,0 +1,240 @@
+[bar/primary]
+enable-ipc = true
+monitor = ${env:MONITORS[1]:HDMI-A-1}
+width = 100%
+height = 30
+
+background = #1f1f1f
+foreground = #eee
+
+line-color = #0b1aea  
+line-size = 1
+
+padding-left = 0
+padding-right = 0
+module-margin-left = 3
+module-margin-right = 3
+
+separator = |
+
+;font-0 = NotoSans-Regular:size=19;-1
+
+;font-0 = Misc\ Termsynu:size=19:antialias=false;3
+;font-0 = NotoSans-Regular:size=10;2
+;font-1 = Material\ Icons:size=10;0
+;font-2 = Misc\ Termsynu:size=10;-2
+;font-3 = FontAwesome:size=9;0
+
+font-0 = NotoSans-Regular:size=9;0
+font-1 = Material\ Icons:size=11;2
+font-2 = xos4\ Terminus:size=14;0
+font-3 = Siji:pixelsize=11;1
+font-4 = FontAwesome:size=11;0
+
+modules-left = i3 
+modules-center = spotify
+modules-right = cpu memory temperature pulseaudio mic-toggle date 
+
+wm-restack = i3
+
+tray-position = right 
+tray-scale = 1
+tray-background = ${self.background}
+tray-offset-y = 0
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+overline-size = 10
+overline-color = ${self.background}
+underline-size = 2
+underline-color = ${self.background}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+use-ui-max = true
+font = 2;
+format-volume = <ramp-volume> <label-volume>
+label-muted =   muted
+label-muted-foreground = #666
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 =  
+ramp-volume-1 =  
+ramp-volume-2 =  
+
+; Right and Middle click
+click-right = pavucontrol
+; click-middle = 
+
+[module/mic-toggle]
+type = custom/script
+interval = 1
+
+format-padding = 0
+format-background = ${BAR.background}
+
+format-prefix-foreground = ${BAR.foreground}
+
+label = %output:0:40:...%
+exec = $HOME/.config/polybar/mic-toggle.sh   
+click-left = $HOME/.config/polybar/mic-toggle.sh --click
+
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label>
+;<ramp-coreload>
+label =  %percentage%%
+
+[module/date]
+type = internal/date
+date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M:%S%%{F-}
+date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%H:%M%%{F#666}:%%{F#fba922}%S%%{F-}
+
+[module/memory]
+type = internal/memory
+format = <label>  <bar-used>
+label =  
+;%gb_used%/%gb_free%
+
+bar-used-width = 5
+bar-used-foreground-0 = #aaff77
+bar-used-foreground-1 = #aaff77
+bar-used-foreground-2 = #fba922
+bar-used-foreground-3 = #ff5555
+bar-used-indicator = |
+bar-used-indicator-font = 6
+bar-used-indicator-foreground = #ff
+bar-used-fill = ─
+bar-used-fill-font = 6
+bar-used-empty = ─
+bar-used-empty-font = 6
+bar-used-empty-foreground = #444444
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted =  %mountpoint%: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = #66
+
+[module/powermenu]
+type = custom/menu
+
+format-padding = 5
+
+label-open = 
+label-close = 
+label-separator = |
+
+menu-0-0 = Terminate WM
+menu-0-0-foreground = #fba922
+menu-0-0-exec = bspc quit -1
+menu-0-1 = Reboot
+menu-0-1-foreground = #fba922
+menu-0-1-exec = menu_open-1
+menu-0-2 = Power off
+menu-0-2-foreground = #fba922
+menu-0-2-exec = menu_open-2
+
+menu-1-0 = Cancel
+menu-1-0-foreground = #fba922
+menu-1-0-exec = menu_open-0
+menu-1-1 = Reboot
+menu-1-1-foreground = #fba922
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = Power off
+menu-2-0-foreground = #fba922
+menu-2-0-exec = sudo poweroff
+menu-2-1 = Cancel
+menu-2-1-foreground = #fba922
+menu-2-1-exec = menu_open-0
+
+
+[module/temperature]
+type = internal/temperature
+base-tempature = 20
+warn-temperature = 65
+
+hwmon-path = /sys/devices/platform/it87.2656/hwmon/hwmon2/temp2_input 
+
+format = <label>
+;format-underline = #f50a4d
+format-warn = <label-warn>
+;format-warn-underline = ${self.format-underline}
+
+label =  %temperature-c%
+label-warn =  %temperature-c%
+label-warn-foreground = #f00
+
+[module/i3]
+type = internal/i3
+
+pin-workspaces = false
+strip-wsnumbers = true
+index-sort = true
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-default =
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = ${BAR.background}
+
+label-focused = %icon%
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+label-focused-underline = #955ffb
+label-focused-padding = 4
+
+label-unfocused = %icon%
+label-unfocused-padding = 4
+
+label-visible = %icon%
+label-visible-foreground = #ffffff
+label-visible-background = #3f3f3f
+label-visible-underline = #555555
+label-visible-padding = 4
+
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 1
+label-separator-foreground = #955ffb
+
+
+[module/spotify]
+type = custom/script
+interval = 1
+format-font = 1;
+format-prefix = "  " 
+format = <label>
+exec = python $HOME/.config/polybar/spotify.py  -f '{play_pause} {song} - {artist} - {album}'
+;control players (optional)
+click-left = playerctl --player=spotify play-pause 
+click-right = playerctl --player=spotify next 
+click-middle = playerctl --player=spotify previous 
+
+format-underline = #1db954
+
+; vim:ft=dosini
