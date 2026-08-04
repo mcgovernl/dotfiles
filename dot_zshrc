@@ -84,6 +84,13 @@ source /usr/share/nvm/init-nvm.sh
 export ANDROID_SDK=$HOME/Android/Sdk
 export PATH=$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$PATH
 
+# bun completions
+[ -s "/home/lmcgovern/.bun/_bun" ] && source "/home/lmcgovern/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -127,6 +134,7 @@ function _web_search() {
     typeset -A urls
     urls[duckduckgo]="https://www.duckduckgo.com/?q="
     urls[github]="https://github.com/search?q="
+    urls[amazon]="https://amazon.com/s?k="
 
     # check whether the search engine is supported
     if [[ -z "${urls[$1]}" ]]; then
@@ -157,6 +165,7 @@ function web_search() {
 
 alias ddg='web_search duckduckgo'
 alias github='web_search github'
+alias amazon='web_search amazon'
 alias wiki='web_search duckduckgo \!w'
 alias map='web_search duckduckgo \!m'
 alias image='web_search duckduckgo \!i'
@@ -169,3 +178,8 @@ alias cpaste='xclip -selection clipboard -o'
 # ip stuff
 alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ip addr | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'"
+
+alias open="open_command"
+
+alias yt="ytsurf"
+

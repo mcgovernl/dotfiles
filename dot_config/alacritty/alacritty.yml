@@ -1,5 +1,12 @@
 env:
-  TERM: xterm-256color
+  TERM: screen-256color
+
+shell:
+  program: /bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux attach || tmux new -s main"
 
 # Colors (Hyper)
 colors:

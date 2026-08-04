@@ -1,6 +1,5 @@
 call plug#begin()
   Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   "Plug 'townk/vim-autoclose'
   Plug 'tpope/vim-commentary'
   " Only load yajs and js syntax highlighting on js and ts files
@@ -14,14 +13,18 @@ call plug#begin()
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
   "Plug 'w0rp/ale'
   Plug 'embark-theme/vim', { 'as': 'embark' }
+  Plug 'drewtempelmeyer/palenight.vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'urbit/hoon.vim'
 call plug#end()
 
 set number
+set relativenumber
 set termguicolors
-colorscheme embark
+set background=dark
+colorscheme palenight
 "let g:airline_theme='emabrk'
 
 " Set tab width to 2 columns
