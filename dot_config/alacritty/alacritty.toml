@@ -1,0 +1,17 @@
+# https://alacritty.org/config-alacritty.html
+[window]
+opacity = 0.8
+
+[font]
+normal = { family = 'JetBrainsMono Nerd Font', style = 'Regular' }
+size = 11.0
+
+[colors.primary]
+background = '#000000'
+
+[cursor]
+style = { shape = 'Block', blinking = 'Always'}
+blink_timeout = 0
+
+[mouse]
+hide_when_typing = true

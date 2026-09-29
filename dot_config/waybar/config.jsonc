@@ -1,0 +1,106 @@
+{
+    "output": "eDP-1",
+    "layer": "top",
+    "position": "top",
+    "modules-left": [
+        "hyprland/workspaces",
+        "custom/spotify"
+    ],
+    "expand-left": true,
+    "modules-center": [
+        "clock"
+    ],
+    "fixed-center": true,
+    "modules-right": [
+        "custom/pacman",
+        "pulseaudio",
+        "battery",
+        "bluetooth",
+        "network"
+    ],
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "states": {
+            "critical": 20,
+            "warning": 40
+        }
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%A, %B %d, %Y (%R)}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "format": {
+                "today": "<span color='#ffcc66'><b>{}</b></span>"
+            }
+        }
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+            "format-bluetooth": "{volume}% {icon}",
+            "format-muted": "",
+            "format-icons": {
+                "alsa_output.pci-0000_00_1f.3.analog-stereo": "\uf028",
+                "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
+                "headphone": "",
+                "hands-free": "󰂑",
+                "headset": "󰂑",
+                "phone": "",
+                "phone-muted": "",
+                "portable": "",
+                "car": "",
+                "default": ["", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol"
+    },
+    "bluetooth": {
+        "format": "  ",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+        "tooltip-format": "{controller_alias}\\t{controller_address}\\n\\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\\t{controller_address}\\n\\n{num_connections} connected\\n\\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\\t{device_address}\\t{device_battery_percentage}%"
+    },
+    "network": {
+        "interface": "wlp2s0",
+        "format": "{ifname}",
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-disconnected": "\udb81\uddaa", 
+        "tooltip-format": "{ifname}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "persistent-workspaces" : {
+            "*": [1,2,3,4]
+        }
+    },
+    "custom/spotify": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/spotify.sh",
+        "return-type": "json",
+        "on-click": "playerctl -p spotify play-pause",
+        "on-scroll-up": "playerctl -p spotify next",
+        "on-scroll-down": "playerctl -p spotify previous",
+        "min-length": 30,
+        "max-length": 40,
+        "align": 0.5
+    },
+    "custom/pacman": {
+        "format": " \udb82\udf7d ",
+        "exec": "~/.config/waybar/scripts/updates.sh",
+        "return-type": "json",
+        "interval": 3600,
+        "on-click": "alacritty -e zsh -c 'yay -Syu; read -k1 \"?Done. Press any key to close...\"'; pkill -SIGRTMIN+8 waybar",
+        "signal": 8
+    }
+}
