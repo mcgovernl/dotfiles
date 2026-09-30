@@ -13,8 +13,10 @@ vim.opt.smarttab = true
 vim.opt.shiftwidth = 4
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
+vim.opt.swapfile = false
 vim.opt.clipboard = 'unnamedplus'
 vim.g.mapleader = ' '
+vim.g.netrw_banner = 0
 
 require('keybinds')
 
